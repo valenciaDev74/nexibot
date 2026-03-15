@@ -1,0 +1,1 @@
+con el prefijo "!nexi" el bot hablara con el usuario respondiendo a su mensaje
