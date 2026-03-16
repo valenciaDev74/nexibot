@@ -53,9 +53,9 @@ async def generarRespuesta(msg, bot):
             model="gemini-3.1-flash-lite-preview",
             contents=[prompt_final],
             config=types.GenerateContentConfig(
-                temperature=1,  # Más 'chispa' y variedad en sus tonterías
+                temperature=0,  # Más 'chispa' y variedad en sus tonterías
                 max_output_tokens=40,  # Garantiza que no se pase de largo
-                top_p=1,
+                top_p=0,
                 thinking_config=types.ThinkingConfig(thinking_level="MINIMAL"),
                 system_instruction=descripcion.replace("\n", " "),
             ),

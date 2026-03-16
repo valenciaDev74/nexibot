@@ -1,4 +1,6 @@
 from discord.ext import commands
+from discord import app_command
+import discord
 from inteligencia_artesanal import generarRespuesta
 import random
 
@@ -20,7 +22,7 @@ class IA(commands.Cog):
         """Lanzarle un tubo a otro usuario"""
         sylveon_asaltado = ctx.message.mentions[0]
         await ctx.send(
-            f"¡**{ctx.author.display_name}** le ha lanzado un tubo a **{sylveon_asaltado.name}** rompiendole la cabeza alv!"
+            f"¡**{ctx.author.display_name}** le ha lanzado un tubo a **{sylveon_asaltado.display_name}** rompiendole la cabeza alv!"
         )
 
     @commands.hybrid_command(name="hablar")
@@ -33,7 +35,7 @@ class IA(commands.Cog):
         """Inmoviliza a otro usuario"""
         sylveon_asaltado = ctx.message.mentions[0]
         await ctx.send(
-            f"¡**{ctx.author.display_name}** ha inmovilizado a **{sylveon_asaltado.name}**\ncomo llego eso ahi :herb:?"
+            f"¡**{ctx.author.display_name}** ha inmovilizado a **{sylveon_asaltado.display_name}**\ncomo llego eso ahi :herb:?"
         )
 
     @commands.hybrid_command(name="detonacion")
@@ -43,12 +45,28 @@ class IA(commands.Cog):
         eevesito_obejtivo = ctx.message.mentions[0]
         if resuldato_aleatorio < 2:
             await ctx.send(
-                f"intentaste detonar a **{eevesito_obejtivo.name}** pero te termino detonando a ti\nalch que sabroso w :fire:"
+                f"intentaste detonar a **{eevesito_obejtivo.display_name}** pero te termino detonando a ti\nalch que sabroso w :fire:"
             )
         else:
             await ctx.send(
-                f"**{ctx.author.display_name}** detono asi bien sabroso a **{eevesito_obejtivo.name}**!\nuy cuanta pasion, los ecos de la detonada resuenan en toda la habitacion :fire:"
+                f"**{ctx.author.display_name}** detono asi bien sabroso a **{eevesito_obejtivo.display_name}**!\nuy cuanta pasion, los ecos de la detonada resuenan en toda la habitacion :fire:"
             )
+
+    @app_command.command(
+        name="secretear",
+        description="Manda un mensaje en secreto sin que sepan q fuiste tu",
+    )
+    async def secretear(self, interaction: discord.Interaction, mensaje: str):
+        # 1. Le avisamos al usuario que funcionó (ephemeral=True hace que solo él lo vea)
+        await interaction.response.send_message(
+            "Mensaje enviado de forma anónima 🤫", ephemeral=True
+        )
+
+        # 2. El bot manda el texto público al canal
+        nexi_dice = generarRespuesta(
+            f"Este es un mensaje secreto, da el mensaje sin revelar de quien es: [{mensaje}]"
+        )
+        await interaction.channel.send(nexi_dice)
 
 
 # Esta función es obligatoria para que el bot pueda cargar el Cog
