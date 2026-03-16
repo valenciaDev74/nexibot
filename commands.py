@@ -2,6 +2,7 @@ from discord.ext import commands
 from discord import app_commands
 import discord
 from inteligencia_artesanal import generarRespuesta
+import variantes
 import random
 
 
@@ -9,64 +10,81 @@ class IA(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.hybrid_command(name="nexi")
+    # ------------ Comandos de texto (prefijos) ------------
+    @commands.command(name="nexi")
+    @commands.cooldown(1, 10, commands.BucketType.user)
     async def nexi(self, ctx, *, consulta: str):
         """Comando para hablar con Nexi"""
-        # Ya no necesitas limpiar el texto, 'consulta' ya trae solo el mensaje
         async with ctx.typing():
             respuesta = await generarRespuesta(ctx.message, self.bot.user)
             await ctx.reply(respuesta)
 
-    @commands.hybrid_command(name="sico")
-    async def sico(self, ctx):
-        """Lanzarle un tubo a otro usuario"""
-        sylveon_asaltado = ctx.message.mentions[0]
-        await ctx.send(
-            f"¡**{ctx.author.display_name}** le ha lanzado un tubo a **{sylveon_asaltado.display_name}** rompiendole la cabeza alv!"
-        )
-
-    @commands.hybrid_command(name="hablar")
+    @commands.command(name="hablar")
+    @commands.cooldown(1, 10, commands.BucketType.user)
     async def hablar(self, ctx):
         """Podemos hablar ?"""
-        await ctx.send("Podemos hablar? ¡Podemos hablar! ¡¡¡¡ ¡¡¡¡ ¡¡¡¡ !!!... Bueno")
+        async with ctx.typing():
+            await ctx.send(
+                "Podemos hablar? ¡Podemos hablar! ¡¡¡¡ ¡¡¡¡ ¡¡¡¡ !!!... Bueno"
+            )
 
-    @commands.hybrid_command(name="ahi")
+    @commands.command(name="ahi")
+    @commands.cooldown(1, 10, commands.BucketType.user)
     async def ahi(self, ctx):
         """Inmoviliza a otro usuario"""
-        sylveon_asaltado = ctx.message.mentions[0]
-        await ctx.send(
-            f"¡**{ctx.author.display_name}** ha inmovilizado a **{sylveon_asaltado.display_name}**\ncomo llego eso ahi :herb:?"
-        )
+        async with ctx.typing():
+            mensaje_inmovilizacion = random.choice(
+                variantes.COMANDO_INMOVILIZAR
+            ).format(
+                autor=ctx.author.display_name,
+                sylveon_asaltado=ctx.message.mentions[0].display_name,
+            )
+            await ctx.send(mensaje_inmovilizacion)
 
-    @commands.hybrid_command(name="detonacion")
+    @commands.command(name="sico")
+    @commands.cooldown(1, 10, commands.BucketType.user)
+    async def sico(self, ctx):
+        """Lanzarle un tubo a otro usuario"""
+        async with ctx.typing():
+            mensaje_psicorayo = random.choice(variantes.COMANDO_PSICORAYO).format(
+                autor=ctx.author.display_name,
+                sylveon_asaltado=ctx.message.mentions[0].display_name,
+            )
+            await ctx.send(mensaje_psicorayo)
+
+    @commands.command(name="detonacion")
+    @commands.cooldown(1, 10, commands.BucketType.user)
     async def detonacion(self, ctx):
         """Detona a un usuario o se detonado"""
-        resuldato_aleatorio = random.randint(1, 3)
         eevesito_obejtivo = ctx.message.mentions[0]
-        if resuldato_aleatorio < 2:
-            await ctx.send(
-                f"intentaste detonar a **{eevesito_obejtivo.display_name}** pero te termino detonando a ti\nalch que sabroso w :fire:"
-            )
-        else:
-            await ctx.send(
-                f"**{ctx.author.display_name}** detono asi bien sabroso a **{eevesito_obejtivo.display_name}**!\nuy cuanta pasion, los ecos de la detonada resuenan en toda la habitacion :fire:"
-            )
+        async with ctx.typing():
+            resuldato_aleatorio = random.randint(1, 3)
+            if resuldato_aleatorio < 2:
+                mensaje_detonacion_fallida = random.choice(
+                    variantes.COMANDO_DETONACION_FALLIDA
+                ).format(
+                    autor=ctx.author.display_name,
+                    eevesito_objetivo=eevesito_obejtivo.display_name,
+                )
+                await ctx.send(mensaje_detonacion_fallida)
+            else:
+                mensaje_detonacion_efectiva = random.choice(
+                    variantes.COMANDO_DETONACION_EFECTIVA
+                ).format(
+                    autor=ctx.author.display_name,
+                    eevesito_objetivo=eevesito_obejtivo.display_name,
+                )
+                await ctx.send(mensaje_detonacion_efectiva)
 
+    # ------------ Comandos de aplicación (slash) ------------
     @app_commands.command(
         name="secretear",
         description="Manda un mensaje en secreto sin que sepan q fuiste tu",
     )
+    @app_commands.checks.cooldown(1, 10, key=lambda i: i.user.id)
     async def secretear(self, interaction: discord.Interaction, mensaje: str):
-        # 1. Le avisamos al usuario que funcionó (ephemeral=True hace que solo él lo vea)
-        await interaction.response.send_message(
-            "Mensaje enviado de forma anónima 🤫", ephemeral=True
-        )
-
-        # 2. El bot manda el texto público al canal
-        nexi_dice = generarRespuesta(
-            f"Este es un mensaje secreto, da el mensaje sin revelar de quien es: [{mensaje}]"
-        )
-        await interaction.channel.send(nexi_dice)
+        mensaje_titular = random.choice(variantes.COMANDO_MENSAJE_SECRETO)
+        await interaction.channel.send(f"**{mensaje_titular}**\n{mensaje}")
 
 
 # Esta función es obligatoria para que el bot pueda cargar el Cog
