@@ -1,4 +1,5 @@
 import os
+import webserver
 import asyncio
 import discord
 from discord.ext import commands
@@ -36,6 +37,7 @@ async def main():
 
 if __name__ == "__main__":
     try:
+        webserver.keep_alive()
         asyncio.run(main())
     except KeyboardInterrupt:
         print("Bot apagado por el usuario, w.")
