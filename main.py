@@ -4,6 +4,8 @@ import asyncio
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
+import random
+from discord.ext import tasks
 
 load_dotenv()
 
@@ -13,6 +15,20 @@ class NexiBot(commands.Bot):
         intents = discord.Intents.default()
         intents.message_content = True
         super().__init__(command_prefix="!", intents=intents)
+
+    @tasks.loop(minutes=20)  # Cambia cada 5 minutos
+    async def cambiar_status(self):
+        frases = [
+            "a doblar Eevee Squad w",
+            "con una tortilla de harina",
+            "Deltarune (cap 5 real)",
+            "a que me den un tubazo",
+            "a ser un femboy god",
+            "soy tu papá w",
+        ]
+        # Elegimos una actividad aleatoria
+        nueva_actividad = discord.Game(name=random.choice(frases))
+        await self.change_presence(activity=nueva_actividad)
 
     async def setup_hook(self):
         # Asegúrate de que el archivo se llame commands.py
@@ -25,6 +41,7 @@ class NexiBot(commands.Bot):
             print(f"Error sincronizando: {e}")
 
     async def on_ready(self):
+        self.cambiar_status.start()
         print(f"Nexi listo en: {self.user}")
 
 

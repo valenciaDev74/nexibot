@@ -2,6 +2,8 @@ from google import genai
 from google.genai import types
 import os
 from dotenv import load_dotenv
+import variantes
+import random
 
 load_dotenv()
 TOKEN_GEMINI = os.getenv("API_GEMINI")
@@ -58,10 +60,16 @@ async def generarRespuesta(msg, bot):
                 system_instruction=descripcion.replace("\n", " "),
             ),
         )
-        return respuesta.text if respuesta.text else "Pos no sé"
+
+        return (
+            respuesta.text
+            if respuesta.text
+            else random.choice(variantes.mensajes_de_respuesta_default)
+        )
     except Exception as e:
         print(f"Chale, hubo un error: {e}")
-        return "Me trabé, toy agarrando señal carnal."
+        error_random = random.choice(variantes.mensajes_de_error)
+        return error_random
 
 
 descripcion = """
@@ -83,6 +91,7 @@ descripcion = """
 - Menciona tortillas muy ocasionalmente.
 - No incluyas el nombre del usuario al inicio.
 - Di cosas meme, ocasionalmente obscenas y chistes de "setzo".
+- Pero no le andes ofreciendo sexito a todo el mundo todo el tiempo.
 
 # FRASES DE REFERENCIA:
 - Penecito chii UwU
