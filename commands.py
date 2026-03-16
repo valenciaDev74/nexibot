@@ -1,5 +1,5 @@
 from discord.ext import commands
-from discord import app_command
+from discord import app_commands
 import discord
 from inteligencia_artesanal import generarRespuesta
 import random
@@ -52,7 +52,7 @@ class IA(commands.Cog):
                 f"**{ctx.author.display_name}** detono asi bien sabroso a **{eevesito_obejtivo.display_name}**!\nuy cuanta pasion, los ecos de la detonada resuenan en toda la habitacion :fire:"
             )
 
-    @app_command.command(
+    @app_commands.command(
         name="secretear",
         description="Manda un mensaje en secreto sin que sepan q fuiste tu",
     )
