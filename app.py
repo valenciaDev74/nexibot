@@ -46,10 +46,19 @@ class NexiBot(commands.Bot):
 
 
 async def main():
+    token = os.getenv("API_DISCORD")
+    if not token:
+        raise SystemExit("ERROR: API_DISCORD no definido en variables de entorno")
+
     bot = NexiBot()
     async with bot:
-        # Usamos el token del .env
-        await bot.start(os.getenv("API_DISCORD"))
+        # Evita retry infinito demasiado rápido y protege contra rate limit en deploy
+        try:
+            await bot.start(token)
+        except discord.HTTPException as e:
+            print(f"discord.HTTPException en login: {e}")
+            # Render puede reintentar rápidamente; termínalo para evitar ban/Cf1015
+            raise
 
 
 if __name__ == "__main__":
