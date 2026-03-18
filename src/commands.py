@@ -1,7 +1,7 @@
 from discord.ext import commands
 from discord import app_commands
 import discord
-from src.inteligencia_artesanal import generarRespuesta, buscar_informacion
+from src.inteligencia_artesanal import generar_respuesta, buscar_informacion
 from src import variantes
 import random
 import asyncio
@@ -18,7 +18,7 @@ class IA(commands.Cog):
     async def nexi(self, ctx, *, consulta: str):
         """Comando para hablar con Nexi"""
         async with ctx.typing():
-            respuesta = await generarRespuesta(ctx.message, self.bot.user)
+            respuesta = await generar_respuesta(ctx.message, self.bot.user)
             await ctx.reply(respuesta)
 
     @commands.command(name="actually")
