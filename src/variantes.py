@@ -22,11 +22,11 @@ mensajes_de_respuesta_default = [
 ]
 
 COMANDO_MENSAJE_SECRETO = [
-    "Un nexito secreto dice:",
-    "Alguien me dijo esto en secreto:",
-    "Shhh... escuchen esto:",
-    "Mensaje anónimo recibido:",
-    "Esto me llegó de incógnito:",
+    "**[mensaje ANOnimo]**\nUn nexito secreto dice:",
+    "**[mensaje ANOnimo]**\nAlguien me dijo esto en secreto:",
+    "**[mensaje ANOnimo]**\nShhh... escuchen esto:",
+    "**[mensaje ANOnimo]**\nMensaje anónimo recibido:",
+    "**[mensaje ANOnimo]**\nEsto me llegó de incógnito:",
 ]
 COMANDO_INMOVILIZAR = [
     "¡**{autor}** ha inmovilizado a **{sylveon_asaltado}**\n¿cómo llegó eso ahí? :herb:?",
@@ -51,4 +51,23 @@ COMANDO_DETONACION_FALLIDA = [
     "Tu intento de detonar a **{eevesito_objetivo}** fracasó miserablemente y terminaste tú siendo el detonado. ¡Eso sí que fue un cambio de roles! :fire:",
     "¡UPS! Querías aplicar la técnica y **{eevesito_objetivo}** te regresó el favor multiplicado por dos. ¡Qué intensidad, w! :fire:",
     "El karma: querías detonar a **{eevesito_objetivo}** y terminaste tú todo adolorido y satisfecho. :fire:",
+]
+COMANDO_FUNA_SOLICITUD = [
+    "¡Ha comenzado la cacería! **{autor}** quiere cancelar a **{objetivo}**.",
+    "¡Pongan las pruebas sobre la mesa! **{autor}** está exponiendo a **{objetivo}**.",
+    "El pueblo ha hablado y **{autor}** lidera la funa contra **{objetivo}**.",
+]
+COMANDO_FUNA_EFECTIVA = [
+    "Te cayo la fiscalia **{objetivo}**, **{autor}** te metio la funa",
+    "Saludame al MAAU **{objetivo}**, **{autor}** te cerró el papoi",
+    "Saludame a Didi **{objetivo}**, te cayeron los federales gracias a **{autor}** heroe del server",
+    "Para que sigas con tus mamadas **{objetivo}**, *la funa de **{autor}** fue super efectiva*",
+]
+COMANDO_FUNA_MOTIVOS_DEFAULT = [
+    "Por asesinar a jolteon y ser cuyeyo",
+    "Por decir puras normiadas",
+    "Porque si",
+    "Por su culpa cristo murio en la cruz",
+    "Obvio no ?",
+    "Pues que te valga no ?",
 ]

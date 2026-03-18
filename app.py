@@ -1,5 +1,5 @@
 import os
-import webserver
+import src.webserver as webserver
 import asyncio
 import discord
 from discord.ext import commands
@@ -32,7 +32,7 @@ class NexiBot(commands.Bot):
 
     async def setup_hook(self):
         # Asegúrate de que el archivo se llame commands.py
-        await self.load_extension("commands")
+        await self.load_extension("src.commands")
 
         try:
             await self.tree.sync()
