@@ -71,3 +71,21 @@ COMANDO_FUNA_MOTIVOS_DEFAULT = [
     "Obvio no ?",
     "Pues que te valga no ?",
 ]
+COMANDO_WEBO_FRASES = [
+    "Finalmente terminé de meterme los huevos por la boca y por la cola, excepción de mi huevito derecho.",
+    "¿Qué? ¿Dónde está mi huevo? Ey, ¿a quién de todo se le ocurrió agarrarme el huevo?",
+    "Ay, deja de decir mamadas. Mejor ve a buscar mi huevo.",
+    "Ay, no. ¿Qué te pasa? Ya ni el MAAU se atrevió tanto.",
+    "Que nadie le importa que haya perdido mi huevo!",
+    "Tengo más huevos que tú. Tengo 16 en la cola.",
+    "Ah, en realidad no se ve tan mal. Ahora sí quieren mis huevos.",
+    "¡Huevos! Oye, tú marihuana 2.0.",
+    "¿Te gustan mis huevos, cariño?",
+    "Te daré mis huevos, pero a cambio me tienes que dar algo muy especial. Okay.",
+    "Vamos a un lugar más privado. Claramente no suena mal.",
+    "Nadie nos podrá escuchar aquí. Solo somos yo y tú... Tu amigable conejo de Pascua.",
+    "¿Aún quieres mis huevos?",
+    "Primero tienes que encontrar mi huevo y luego te dejaré tener todos los huevos que quieras conmigo.",
+    "Y solo déjame decirte que me sudan un chingo.",
+    "Oh, cariño, eso no son los tipos de huevo que necesitaba.",
+]

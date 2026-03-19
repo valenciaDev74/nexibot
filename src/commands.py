@@ -190,6 +190,14 @@ class IA(commands.Cog):
 
             await ctx.send("La funa ha expirado por falta de pruebas (1 minuto). ⚖️")
 
+    @commands.command(name="webo")
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def webo(self, ctx):
+        """Suelta una frase legendaria de los huevos de Nexi"""
+        async with ctx.typing():
+            frase = random.choice(variantes.COMANDO_WEBO_FRASES)
+            await ctx.send(f"🥚🥚 **|** {frase}")
+
     # ------------ Comandos de aplicación (slash) ------------
     @app_commands.command(
         name="secretear",
