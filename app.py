@@ -67,3 +67,4 @@ if __name__ == "__main__":
         asyncio.run(main())
     except KeyboardInterrupt:
         print("Bot apagado por el usuario, w.")
+        exit(0)
